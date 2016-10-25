@@ -1,0 +1,41 @@
+# Visual Studio files
+*.vssscc
+*.vspscc
+*.suo
+*.tmp
+~*.docx
+*.user
+*.dll
+*.nupkg
+ 
+# ignore library files
+**/[Ll]ib/**/*.*
+**/[Pp]ackages/*.*
+
+# Build output
+**/[Bb]in/**
+**/[Oo]bj/**
+**/[Bb]uild/**
+
+# ReSharper
+_ReSharper*/
+*.[Rr]e[Ss]harper
+*.DotSettings.user
+
+# Auto-Git
+**/.HistoryData/**
+
+# Git Merge
+*.BACKUP.*
+*.BASE.*
+*.LOCAL.*
+*.REMOTE.*
+
+# NCrunch
+**/*.ncrunchsolution
+**/*.ncrunchproject
+src/_NCrunch_*/**
+Src/Help/
+
+#Git User File
+*.user
