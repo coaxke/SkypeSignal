@@ -1,5 +1,11 @@
 #include <Adafruit_NeoPixel.h>
 
+/*
+Patrick Squire - Resdevops.com
+Copyright (C) 2016 - All Rights Reserved
+*/
+
+//Const:
 int dataPin = 6;  // Arduino PWM data pin D6
 int pixels = 1;  // number of Neopixels
 int SkypeCommand;
@@ -64,11 +70,10 @@ void loop()
       SetLedColour(0, 0, 0);  
    }	
   	//Echo the output
-  	Serial.println(LoopCommand);  
+  	//Serial.println(LoopCommand);  
   
    //Flush Serial Bus at end
    Serial.flush();
-
 }
 
 void FadeRedInOut()
