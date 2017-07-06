@@ -13,7 +13,7 @@ namespace SkypeSignal
         /// <summary>
         /// Notify Icon Object
         /// </summary>
-        NotifyIcon ni;
+        readonly NotifyIcon ni;
 
         public ProcessIcon()
         {

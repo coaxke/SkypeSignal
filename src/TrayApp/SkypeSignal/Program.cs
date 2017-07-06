@@ -4,7 +4,7 @@ using System.Threading;
 
 namespace SkypeSignal
 {
-    static class Program
+    internal static class Program
     {
         /// <summary>
         /// The main entry point for the application.
@@ -22,10 +22,9 @@ namespace SkypeSignal
             serialSender.SendSerialData("0");
 
 
-            SkypeStatusInfo skypeStatus = new SkypeStatusInfo();
-           // ProcessIcon pi = new ProcessIcon();
+            var skypeStatus = new SkypeStatusInfo();
 
-            Thread skypeStatusMonitor = new Thread(new ThreadStart(skypeStatus.StatusSetup));
+            var skypeStatusMonitor = new Thread(skypeStatus.StatusSetup);
 
 
             skypeStatusMonitor.Start();  

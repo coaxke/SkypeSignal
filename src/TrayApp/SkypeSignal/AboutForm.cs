@@ -13,7 +13,7 @@ namespace SkypeSignal
         {
             InitializeComponent();
             lbl_ProductName.Text    = AssemblyProductName;
-            lbl_Version.Text        = string.Format("Version {0}", AssemblyVersion);
+            lbl_Version.Text        = $"Version {AssemblyVersion}";
             tb_Description.Text     = AssemblyDescription;
         }
 
@@ -37,15 +37,15 @@ namespace SkypeSignal
 
         private void llbl_ResdevOps_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            Process.Start("http://www.resdevops.com");
+            Process.Start("https://www.resdevops.com");
         }
 
 
-        private string AssemblyProductName
+        private static string AssemblyProductName
         {
             get
             {
-                object[] attributes = Assembly.GetExecutingAssembly().GetCustomAttributes(typeof(AssemblyProductAttribute), false);
+                var attributes = Assembly.GetExecutingAssembly().GetCustomAttributes(typeof(AssemblyProductAttribute), false);
                 if (attributes.Length == 0)
                 {
                     return "";
@@ -54,7 +54,7 @@ namespace SkypeSignal
             }
         }
 
-        private string AssemblyVersion
+        private static string AssemblyVersion
         {
             get
             {

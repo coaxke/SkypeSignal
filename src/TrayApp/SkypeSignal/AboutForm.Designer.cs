@@ -111,10 +111,10 @@
             this.llbl_ResdevOps.AutoSize = true;
             this.llbl_ResdevOps.Location = new System.Drawing.Point(223, 250);
             this.llbl_ResdevOps.Name = "llbl_ResdevOps";
-            this.llbl_ResdevOps.Size = new System.Drawing.Size(137, 13);
+            this.llbl_ResdevOps.Size = new System.Drawing.Size(142, 13);
             this.llbl_ResdevOps.TabIndex = 6;
             this.llbl_ResdevOps.TabStop = true;
-            this.llbl_ResdevOps.Text = "http://www.resdevops.com";
+            this.llbl_ResdevOps.Text = "https://www.resdevops.com";
             this.llbl_ResdevOps.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.llbl_ResdevOps_LinkClicked);
             // 
             // tb_Description
@@ -123,6 +123,7 @@
             this.tb_Description.Location = new System.Drawing.Point(226, 86);
             this.tb_Description.Multiline = true;
             this.tb_Description.Name = "tb_Description";
+            this.tb_Description.ReadOnly = true;
             this.tb_Description.Size = new System.Drawing.Size(290, 161);
             this.tb_Description.TabIndex = 7;
             // 
@@ -130,7 +131,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(523, 302);
+            this.ClientSize = new System.Drawing.Size(519, 298);
             this.ControlBox = false;
             this.Controls.Add(this.tb_Description);
             this.Controls.Add(this.llbl_ResdevOps);

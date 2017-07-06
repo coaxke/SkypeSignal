@@ -5,7 +5,7 @@ using System.Windows.Forms;
 
 namespace SkypeSignal
 {
-    class SerialSender
+    internal class SerialSender
     {
         static SerialPort _serialPort;
 

@@ -6,10 +6,10 @@ using Microsoft.Lync.Model;
 
 namespace SkypeSignal
 {
-    class SkypeStatusInfo
+    internal class SkypeStatusInfo
     {
-        SerialSender _serialSender = new SerialSender();
-        System.Timers.Timer _partyTimer = new System.Timers.Timer();
+        readonly SerialSender _serialSender = new SerialSender();
+        private readonly System.Timers.Timer _partyTimer = new System.Timers.Timer();
 
         LyncClient _lyncClient;
 
@@ -18,7 +18,7 @@ namespace SkypeSignal
             _partyTimer.Enabled = true;
             _partyTimer.Interval = 20000;
             _partyTimer.AutoReset = false;
-            _partyTimer.Elapsed += new ElapsedEventHandler(PartyTimerElapesed);
+            _partyTimer.Elapsed += PartyTimerElapesed;
         }
 
         public void StatusSetup()
@@ -39,11 +39,10 @@ namespace SkypeSignal
 
                 if (_lyncClient != null && _lyncClient.State == ClientState.SignedIn)
                 {
-                    ///This is bogus, its just for testing, don't hate
                     while (true)
                     {
-                        _lyncClient.Self.Contact.ContactInformationChanged -= new EventHandler<ContactInformationChangedEventArgs>(ContactChangeStatusUpdate);
-                        _lyncClient.Self.Contact.ContactInformationChanged += new EventHandler<ContactInformationChangedEventArgs>(ContactChangeStatusUpdate);
+                        _lyncClient.Self.Contact.ContactInformationChanged -= ContactChangeStatusUpdate;
+                        _lyncClient.Self.Contact.ContactInformationChanged += ContactChangeStatusUpdate;
 
 
                         Thread.Sleep(2000);
@@ -67,44 +66,44 @@ namespace SkypeSignal
             //TODO Remove Echo from App on Arduino
             if (_lyncClient != null && _lyncClient.State == ClientState.SignedIn)
             {
-                var Status = _lyncClient.Self.Contact.GetContactInformation(ContactInformationType.ActivityId).ToString();
+                var status = _lyncClient.Self.Contact.GetContactInformation(ContactInformationType.ActivityId).ToString();
 
-                switch (Status)
+                switch (status)
                 {
                     case "Free":
-                        _serialSender.SendSerialData("1");
+                        _serialSender.SendSerialData(ColourStates.Green);
                         break;
                     case "in-a-meeting":
                     case "Busy":
-                        _serialSender.SendSerialData("2");
+                        _serialSender.SendSerialData(ColourStates.Red);
                         break;
                     case "DoNotDisturb":
                     case "out-of-office":
                     case "urgent-interruptions-only":
                     case "presenting":
-                        _serialSender.SendSerialData("3");
+                        _serialSender.SendSerialData(ColourStates.Purple);
                         break;
                     case "Away":
                     case "BeRightBack":
                     case "off-work":
                     case "Inactive":
-                        _serialSender.SendSerialData("4");
+                        _serialSender.SendSerialData(ColourStates.Yellow);
                         break;
                     case "on-the-phone":
                     case "in-a-conference":
-                        _serialSender.SendSerialData("5");
+                        _serialSender.SendSerialData(ColourStates.RedFade);
                         break;
                     default:
-                        _serialSender.SendSerialData("0");
+                        _serialSender.SendSerialData(ColourStates.Off);
                         break;
                 }
             }
-            else _serialSender.SendSerialData("0");
+            else _serialSender.SendSerialData(ColourStates.Off);
         }
 
         public void PartyDown()
         {
-            _serialSender.SendSerialData("7");
+            _serialSender.SendSerialData(ColourStates.PartyStrobe);
             _partyTimer.Start();
         }
 

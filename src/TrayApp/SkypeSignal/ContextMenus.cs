@@ -10,7 +10,12 @@ namespace SkypeSignal
         /// <summary>
         /// Is the About box displayed?
         /// </summary>
-        bool isAboutLoaded = false;
+        bool _isAboutLoaded;
+
+        /// <summary>
+        /// Is the Flash firmware dialogue box loaded?
+        /// </summary>
+        private bool _isFlashFirmwareLoaded;
 
         /// <summary>
         /// Creates this instance.
@@ -20,13 +25,19 @@ namespace SkypeSignal
         {
             // Add the default menu options.
             ContextMenuStrip menu = new ContextMenuStrip();
-            ToolStripMenuItem item;
-            ToolStripSeparator sep;
 
             //About
-            item = new ToolStripMenuItem();
-            item.Text = "About";
-            item.Click += new EventHandler(About_Click);
+            var item = new ToolStripMenuItem {Text = "About"};
+            item.Click += About_Click;
+            menu.Items.Add(item);
+
+            // Separator.
+            var sep = new ToolStripSeparator();
+            menu.Items.Add(sep);
+
+            //Flash SkypeSignal
+            item = new ToolStripMenuItem {Text = "Flash SkypeSignal Firmware"};
+            item.Click += FlashFirmware_Click;
             menu.Items.Add(item);
 
             // Separator.
@@ -34,9 +45,8 @@ namespace SkypeSignal
             menu.Items.Add(sep);
 
             //Exit
-            item = new ToolStripMenuItem();
-            item.Text = "Exit";
-            item.Click += new System.EventHandler(Exit_Click);
+            item = new ToolStripMenuItem {Text = "Exit"};
+            item.Click += Exit_Click;
             menu.Items.Add(item);
 
             return menu;
@@ -49,11 +59,26 @@ namespace SkypeSignal
         /// <param name="e">The <see cref="System.EventArgs"/> instance containing the event data.</param>
         void About_Click(object sender, EventArgs e)
         {
-            if (!isAboutLoaded)
+            if (!_isAboutLoaded)
             {
-                isAboutLoaded = true;
+                _isAboutLoaded = true;
                 new AboutForm().ShowDialog();
-                isAboutLoaded = false;
+                _isAboutLoaded = false;
+            }
+        }
+
+        /// <summary>
+        /// Handles the Click event of the Flash SkypeSignal Firmware control.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        void FlashFirmware_Click(object sender, EventArgs e)
+        {
+            if (!_isFlashFirmwareLoaded)
+            {
+                _isFlashFirmwareLoaded = true;
+                //new FlashFirmware().ShowDialog();
+                _isFlashFirmwareLoaded = false;
             }
         }
 

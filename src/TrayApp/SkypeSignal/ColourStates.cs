@@ -1,15 +1,14 @@
 ﻿
 namespace SkypeSignal
 {
-        public enum colourStates 
+        public static class ColourStates
         {
-            Green       = 1,
-            Yellow      = 2,
-            Red         = 3,
-            Purple      = 4,
-            RedFade     = 5,
-            PartyStrobe = 7
-
+            public const string Off         = "0";
+            public const string Green       = "1";
+            public const string Yellow      = "2";
+            public const string Red         = "3";
+            public const string Purple      = "4";
+            public const string RedFade     = "5";
+            public const string PartyStrobe = "7";
         }
-
 }
