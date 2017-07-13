@@ -36,11 +36,13 @@ namespace SkypeSignal
             {
                 //We couldnt send a message to the serial device - We'll take the easy way out and show it to the user on screen.
                 MessageBox.Show(
-                    $"Could not send Skype/Lync status change command to serial device, the error was {Ex.Message} - Investigate and try again",
+                    $"Could not send Skype/Lync status change command to serial device, the error was {Ex.Message} - Application quitting; Investigate and try again",
                     "Error Sending Serial Command",
                     MessageBoxButtons.OK,
                     MessageBoxIcon.Error
                     );
+
+                Application.Exit();
             }
         }
 

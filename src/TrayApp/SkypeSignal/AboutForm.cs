@@ -28,7 +28,6 @@ namespace SkypeSignal
             SkypeStatusInfo statusInfo = new SkypeStatusInfo();
 
             statusInfo.PartyDown();
-
         }
 
 

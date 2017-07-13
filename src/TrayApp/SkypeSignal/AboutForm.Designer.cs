@@ -61,7 +61,7 @@
             // 
             // btn_Close
             // 
-            this.btn_Close.Location = new System.Drawing.Point(426, 271);
+            this.btn_Close.Location = new System.Drawing.Point(426, 266);
             this.btn_Close.Name = "btn_Close";
             this.btn_Close.Size = new System.Drawing.Size(73, 27);
             this.btn_Close.TabIndex = 1;
@@ -71,7 +71,7 @@
             // 
             // btn_PartyTime
             // 
-            this.btn_PartyTime.Location = new System.Drawing.Point(308, 271);
+            this.btn_PartyTime.Location = new System.Drawing.Point(308, 266);
             this.btn_PartyTime.Name = "btn_PartyTime";
             this.btn_PartyTime.Size = new System.Drawing.Size(112, 27);
             this.btn_PartyTime.TabIndex = 2;
@@ -131,7 +131,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(519, 298);
+            this.ClientSize = new System.Drawing.Size(515, 294);
             this.ControlBox = false;
             this.Controls.Add(this.tb_Description);
             this.Controls.Add(this.llbl_ResdevOps);

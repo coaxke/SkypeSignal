@@ -3,6 +3,8 @@ using System.Windows.Forms;
 using System.Threading;
 using System.Timers;
 using Microsoft.Lync.Model;
+using Microsoft.Lync.Model.Conversation;
+using Microsoft.Lync.Model.Conversation.AudioVideo;
 
 namespace SkypeSignal
 {
@@ -31,7 +33,7 @@ namespace SkypeSignal
                 }
                 catch (Exception)
                 {                    
-                    MessageBox.Show("Cannot find a lync client - Quitting", "Lync Client Process Not found", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show("Cannot find a Lync client - Quitting", "Lync Client Process Not found", MessageBoxButtons.OK, MessageBoxIcon.Error);
 
                     //Quit - We cant do anything.
                     Environment.Exit(1);
@@ -41,25 +43,51 @@ namespace SkypeSignal
                 {
                     while (true)
                     {
+                        //_lyncClient.ConversationManager.ConversationAdded -= ConversationAdded;
+                        _lyncClient.ConversationManager.ConversationAdded += ConversationAdded;
+
                         _lyncClient.Self.Contact.ContactInformationChanged -= ContactChangeStatusUpdate;
                         _lyncClient.Self.Contact.ContactInformationChanged += ContactChangeStatusUpdate;
 
-
-                        Thread.Sleep(2000);
+                        Thread.Sleep(20000);
                     }
                 }
             }
         }
 
-        public void ContactChangeStatusUpdate(object sender, ContactInformationChangedEventArgs e)
+        private void ContactChangeStatusUpdate(object sender, ContactInformationChangedEventArgs e)
         {
             if (e.ChangedContactInformation.Contains(ContactInformationType.ActivityId))
             {
-                SetLyncStatus();
+                SetCurrentLyncStatus();
             }
         }
 
-        public void SetLyncStatus()
+        private void ConversationAdded(object sender, ConversationManagerEventArgs e)
+        {
+            bool notified = false;
+            var avModality = (AVModality) e.Conversation.Modalities[ModalityTypes.AudioVideo];
+
+
+            while (e.Conversation.Modalities[ModalityTypes.AudioVideo].State == ModalityState.Notified &&
+                   e.Conversation.State == ConversationState.Active)
+            {
+                while (notified != true)
+                {
+                    //We have an incomming call
+                    if (avModality.State == ModalityState.Notified)
+                    {
+                        _serialSender.SendSerialData(ColourStates.BlueIncomingCall);
+
+                        notified = true;
+                    }
+                }
+            }
+            //Return user back to their current Sykpe State     
+            SetCurrentLyncStatus();
+        }
+
+        private void SetCurrentLyncStatus()
         {
             _lyncClient = LyncClient.GetClient();
 
@@ -91,7 +119,7 @@ namespace SkypeSignal
                         break;
                     case "on-the-phone":
                     case "in-a-conference":
-                        _serialSender.SendSerialData(ColourStates.RedFade);
+                        _serialSender.SendSerialData(ColourStates.RedFadeInACall);
                         break;
                     default:
                         _serialSender.SendSerialData(ColourStates.Off);
@@ -110,7 +138,7 @@ namespace SkypeSignal
         private void PartyTimerElapesed(object source, ElapsedEventArgs e)
         {
             //Reset Light to current Lync status by forcing a Check.
-            SetLyncStatus();
+            SetCurrentLyncStatus();
         }
     }
 }

@@ -20,11 +20,11 @@ namespace SkypeSignal
             //kick-off connection to Light before we start and send a non-event code:
             SerialSender serialSender = new SerialSender();
             serialSender.SendSerialData("0");
-
-
+            
             var skypeStatus = new SkypeStatusInfo();
 
             var skypeStatusMonitor = new Thread(skypeStatus.StatusSetup);
+            
 
 
             skypeStatusMonitor.Start();  

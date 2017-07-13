@@ -59,7 +59,11 @@ void loop()
       break;
     case 5:
       //On a Call/Conf Call [Pulsing Red]
-        FadeRedInOut(); 
+        InACall(); 
+      break;
+     case 6:
+      //Incoming Call
+      IncomingCall();
       break;
     case 7:
       //Party Mode
@@ -76,7 +80,7 @@ void loop()
    Serial.flush();
 }
 
-void FadeRedInOut()
+void InACall()
 {  
     // Fade IN
     for(int k = 0; k < 255; k++) 
@@ -101,6 +105,19 @@ void FadeRedInOut()
     }
 }
 
+void IncomingCall()
+{
+  for (int i = 0; i < pixels; i++) 
+  {
+    strip.setPixelColor(i, 0, 0, 255);
+    strip.show();
+    delay(1500);
+    strip.setPixelColor(i, 95, 255, 0);
+    strip.show();
+    delay(200);  
+  }
+}
+
 void SetLedColour(int G, int R, int B)
 {
  for (int i = 0; i < pixels; i++) 
@@ -108,7 +125,7 @@ void SetLedColour(int G, int R, int B)
     strip.setPixelColor(i, G, R, B);
   }
   strip.show();
-  delay(5000); //Snooze for 5 secs so we're not spamming serial connection.
+  //delay(5000); //Snooze for 5 secs so we're not spamming serial connection.
 }
 
 void PartyMode()
