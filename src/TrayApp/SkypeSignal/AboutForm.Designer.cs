@@ -124,14 +124,14 @@
             this.tb_Description.Multiline = true;
             this.tb_Description.Name = "tb_Description";
             this.tb_Description.ReadOnly = true;
-            this.tb_Description.Size = new System.Drawing.Size(290, 161);
+            this.tb_Description.Size = new System.Drawing.Size(273, 161);
             this.tb_Description.TabIndex = 7;
             // 
             // AboutForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(515, 294);
+            this.ClientSize = new System.Drawing.Size(511, 290);
             this.ControlBox = false;
             this.Controls.Add(this.tb_Description);
             this.Controls.Add(this.llbl_ResdevOps);
