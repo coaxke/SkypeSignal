@@ -78,6 +78,8 @@ namespace SkypeSignal
             {
                 _isFlashFirmwareLoaded = true;
                 //new FlashFirmware().ShowDialog();
+                MessageBox.Show("Feature coming soon...", "Sorry", MessageBoxButtons.OK,
+                    MessageBoxIcon.Hand);
                 _isFlashFirmwareLoaded = false;
             }
         }
