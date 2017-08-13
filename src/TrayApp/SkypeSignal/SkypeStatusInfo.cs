@@ -41,16 +41,11 @@ namespace SkypeSignal
 
                 if (_lyncClient != null && _lyncClient.State == ClientState.SignedIn)
                 {
-                    while (true)
-                    {
-                        //_lyncClient.ConversationManager.ConversationAdded -= ConversationAdded;
-                        _lyncClient.ConversationManager.ConversationAdded += ConversationAdded;
+                    //Subscribe to Conversation Added events for Incoming call alerts:
+                    _lyncClient.ConversationManager.ConversationAdded += ConversationAdded;
 
-                        _lyncClient.Self.Contact.ContactInformationChanged -= ContactChangeStatusUpdate;
-                        _lyncClient.Self.Contact.ContactInformationChanged += ContactChangeStatusUpdate;
-
-                        Thread.Sleep(20000);
-                    }
+                    //Subscribe to Contact Information Changed events for client status changes.
+                    _lyncClient.Self.Contact.ContactInformationChanged += ContactChangeStatusUpdate;
                 }
             }
         }
@@ -65,7 +60,7 @@ namespace SkypeSignal
 
         private void ConversationAdded(object sender, ConversationManagerEventArgs e)
         {
-            bool notified = false;
+            var notified = false;
             var avModality = (AVModality) e.Conversation.Modalities[ModalityTypes.AudioVideo];
 
 
@@ -90,8 +85,7 @@ namespace SkypeSignal
         private void SetCurrentLyncStatus()
         {
             _lyncClient = LyncClient.GetClient();
-
-            //TODO Remove Echo from App on Arduino
+            
             if (_lyncClient != null && _lyncClient.State == ClientState.SignedIn)
             {
                 var status = _lyncClient.Self.Contact.GetContactInformation(ContactInformationType.ActivityId).ToString();
@@ -129,8 +123,10 @@ namespace SkypeSignal
             else _serialSender.SendSerialData(ColourStates.Off);
         }
 
+        
         public void PartyDown()
         {
+            //Wimmy Wam Wam Wozzle!!!
             _serialSender.SendSerialData(ColourStates.PartyStrobe);
             _partyTimer.Start();
         }
