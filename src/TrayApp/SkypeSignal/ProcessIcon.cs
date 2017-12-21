@@ -24,13 +24,13 @@ namespace SkypeSignal
 
         public void DisplayIcon()
         {
-            //Put the icon in the System try and allow it to react to mouse-clikcs:
+            //Put the icon in the System try and allow it to react to mouse-clicks:
             //ni.MouseClick += new MouseEventHandler(ni_MouseClick);
             ni.Icon = Resources.ResdevOpsSkypeSignal_Icon;
             ni.Text = "SkypeSignal Light Notification";
             ni.Visible = true;
 
-            //Atach the context menu
+            //Attach the context menu
             ni.ContextMenuStrip = new ContextMenus().Create();
         }
 
