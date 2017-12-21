@@ -20,7 +20,7 @@ namespace SkypeSignal
             _partyTimer.Enabled = true;
             _partyTimer.Interval = 20000;
             _partyTimer.AutoReset = false;
-            _partyTimer.Elapsed += PartyTimerElapesed;
+            _partyTimer.Elapsed += PartyTimerElapsed;
         }
 
         public void StatusSetup()
@@ -131,7 +131,7 @@ namespace SkypeSignal
             _partyTimer.Start();
         }
 
-        private void PartyTimerElapesed(object source, ElapsedEventArgs e)
+        private void PartyTimerElapsed(object source, ElapsedEventArgs e)
         {
             //Reset Light to current Lync status by forcing a Check.
             SetCurrentLyncStatus();
